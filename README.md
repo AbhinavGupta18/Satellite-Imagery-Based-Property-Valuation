@@ -14,7 +14,7 @@ Finally, we developed a **fusion model** that combines predictions from the **ta
 This multimodal approach demonstrates how combining structured data with visual context can lead to more accurate and interpretable property valuation models.
 
 
-## 📦 Dataset
+##  Dataset
 
 This project uses the **Data-CDC** dataset from Kaggle.  
 Because the dataset (~3.1 GB) is too large for direct GitHub hosting, it must be downloaded separately.
