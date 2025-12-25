@@ -39,10 +39,12 @@ kaggle datasets download -d tasteing/data-cdc -p data
 unzip data/data-cdc.zip -d data
 
 ```
+Structure :
+```
 data/
   ├── images_train
   ├── images_test
   ├── train.csv
   └── test.csv
-
+```
 
