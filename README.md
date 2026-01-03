@@ -1,50 +1,73 @@
 # Satellite Imagery Based Property Valuation
 
+This project predicts property prices by combining traditional housing data with satellite imagery analysis.
 
-This project focuses on **property price prediction using both tabular housing data and satellite imagery**.
+## Project Overview
 
-We begin with **Exploratory Data Analysis (EDA)** to understand the distribution of prices and the impact of key features such as location, area, and number of rooms. Based on this analysis, multiple **tabular models** were trained and evaluated, including **Linear Regression (LR)**, **Polynomial Regression**, and **XGBoost (XGB)**.
+We start with **Exploratory Data Analysis (EDA)** to examine price distributions and understand how features like location, area, and room count affect property values. From this foundation, we train and evaluate several **tabular models**, including **Linear Regression (LR)**, **Polynomial Regression**, and **XGBoost (XGB)**.
 
-To incorporate visual information, we trained a **CNN-based image model using ResNet18**. A lightweight architecture was chosen due to limited computational resources, while still capturing meaningful spatial features from satellite images.
+To capture visual information from property surroundings, we train a **CNN-based image model using ResNet18**. We chose this lightweight architecture to work within computational constraints while still extracting meaningful spatial features from satellite images.
 
-For model interpretability, **Grad-CAM** was applied to visualize which regions of the satellite images influenced the CNN’s predictions.
+For better interpretability, we apply **Grad-CAM** to visualize which parts of satellite images most influence the CNN's predictions.
 
-Finally, we developed a **fusion model** that combines predictions from the **tabular XGBoost model** and the **image-based CNN model**. The outputs of both models are stacked and passed to a meta-learner, resulting in improved performance compared to using tabular or image data alone.
+The final step brings everything together in a **fusion model** that combines predictions from both the **tabular XGBoost model** and the **image-based CNN model**. We stack their outputs and feed them to a meta-learner, achieving better performance than either model alone.
 
-This multimodal approach demonstrates how combining structured data with visual context can lead to more accurate and interpretable property valuation models.
+This multimodal approach shows how structured data and visual context can work together to create more accurate and interpretable property valuations.
 
+## Project Files
 
-##  Dataset
+- **`23322001_report.pdf`** - Comprehensive project report with methodology and results
+- **`23322001_final.csv`** - Final test predictions output
+- **`preprocessing+model-training.ipynb`** - Main notebook containing data preprocessing, model training, and evaluation
+- **`data_fetcher.ipynb`** - Image downloader using Google Maps Static API
 
-This project uses the **Data-CDC** dataset from Kaggle.  
-Because the dataset (~3.1 GB) is too large for direct GitHub hosting, it must be downloaded separately.
+## Dataset
+
+This project uses the **Data-CDC** dataset from Kaggle. Since the dataset is approximately 3.1 GB, it cannot be hosted directly on GitHub and must be downloaded separately.
 
 **Kaggle Dataset URL:**  
 https://www.kaggle.com/datasets/tasteing/data-cdc
 
+## Downloading the Dataset
 
-
-## To Download the Data
-
-You need the Kaggle CLI installed and configured with your API token.
+You'll need the Kaggle CLI installed and configured with your API token.
 
 ### Install Kaggle CLI
 
-```
+```bash
 pip install kaggle
+```
 
+### Configure API Token
+
+Place your `kaggle.json` file in the appropriate directory and set permissions:
+
+```bash
 chmod 600 ~/.kaggle/kaggle.json
+```
+
+### Download and Extract Data
+
+```bash
 mkdir -p data
 kaggle datasets download -d tasteing/data-cdc -p data
 unzip data/data-cdc.zip -d data
+```
+
+### Expected Data Structure
 
 ```
-Structure :
-```
 data/
-  ├── images_train
-  ├── images_test
+  ├── images_train/
+  ├── images_test/
   ├── train.csv
   └── test.csv
 ```
 
+## Getting Started
+
+1. Download the dataset following the instructions above
+2. Open `data_fetcher.ipynb` if you need to fetch additional satellite images
+3. Run `preprocessing+model-training.ipynb` to train models and generate predictions
+4. Review `23322001_report.pdf` for detailed methodology and analysis
+5. Check `23322001_final.csv` for the final prediction results
